@@ -21,6 +21,14 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function AdminDashboard() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -50,6 +58,24 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleOrderStatusUpdate = async (orderId: string, type: 'paymentStatus' | 'orderStatus', value: string) => {
+    try {
+      const res = await fetch(`/api/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ [type]: value }),
+      });
+      if (res.ok) {
+        setOrders(orders.map(o => o._id === orderId ? { ...o, [type]: value } : o));
+        toast.success(`Order ${type} updated to ${value}`);
+      } else {
+        toast.error("Failed to update order");
+      }
+    } catch (error) {
+      toast.error("An error occurred");
+    }
+  };
 
   const stats = {
     totalOrders: orders.length,
@@ -464,12 +490,36 @@ export default function AdminDashboard() {
                              </Badge>
                           </TableCell>
                           <TableCell>
-                             <Badge className={o.paymentStatus === 'paid' ? 'bg-emerald-50 text-emerald-600 border-none rounded-full px-5 py-1.5 font-black text-[9px] uppercase tracking-widest' : 'bg-orange-50 text-orange-600 border-none rounded-full px-5 py-1.5 font-black text-[9px] uppercase tracking-widest'}>
-                               {o.paymentStatus}
-                             </Badge>
+                             <div className="flex flex-col items-start gap-2">
+                               <Badge className={o.paymentStatus === 'paid' ? 'bg-emerald-50 text-emerald-600 border-none rounded-full px-5 py-1.5 font-black text-[9px] uppercase tracking-widest' : 'bg-orange-50 text-orange-600 border-none rounded-full px-5 py-1.5 font-black text-[9px] uppercase tracking-widest'}>
+                                 {o.paymentStatus}
+                               </Badge>
+                               {o.transactionId && (
+                                 <span className="text-[9px] font-bold text-muted-foreground bg-secondary px-2 py-1 rounded-md">TrxID: {o.transactionId}</span>
+                               )}
+                             </div>
                           </TableCell>
                           <TableCell className="px-10 text-right">
-                             <Button className="h-12 rounded-xl px-8 font-black text-[10px] uppercase tracking-widest bg-foreground text-white hover:bg-foreground/80 transition-all shadow-sm">Update Flow</Button>
+                             <DropdownMenu>
+                               <DropdownMenuTrigger asChild>
+                                 <Button className="h-12 rounded-xl px-8 font-black text-[10px] uppercase tracking-widest bg-foreground text-white hover:bg-foreground/80 transition-all shadow-sm">
+                                   Update Flow
+                                 </Button>
+                               </DropdownMenuTrigger>
+                               <DropdownMenuContent align="end" className="w-56 rounded-2xl p-2 border-border/40 shadow-xl">
+                                 <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-2 pt-2">Payment</DropdownMenuLabel>
+                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'paymentStatus', 'paid')} className="text-xs font-bold rounded-xl cursor-pointer">Mark as Paid</DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'paymentStatus', 'pending')} className="text-xs font-bold rounded-xl cursor-pointer">Mark as Pending</DropdownMenuItem>
+                                 
+                                 <DropdownMenuSeparator className="my-2 bg-border/40" />
+                                 
+                                 <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-2">Logistics</DropdownMenuLabel>
+                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'pending')} className="text-xs font-bold rounded-xl cursor-pointer">Pending</DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'shipped')} className="text-xs font-bold rounded-xl cursor-pointer text-blue-600">Shipped</DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'delivered')} className="text-xs font-bold rounded-xl cursor-pointer text-emerald-600">Delivered</DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'cancelled')} className="text-xs font-bold rounded-xl cursor-pointer text-red-600">Cancelled</DropdownMenuItem>
+                               </DropdownMenuContent>
+                             </DropdownMenu>
                           </TableCell>
                         </TableRow>
                       ))}

@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   try {
     await dbConnect();
     const body = await request.json();
-    const { customer, items, subtotal, deliveryFee, total, paymentMethod } = body;
+    const { customer, items, subtotal, deliveryFee, total, paymentMethod, transactionId } = body;
 
     const order = await Order.create({
       customer,
@@ -16,12 +16,17 @@ export async function POST(request: Request) {
       deliveryFee,
       total,
       paymentMethod,
-      paymentStatus: "pending",
+      paymentStatus: paymentMethod === "bKash" ? "paid" : "pending",
       orderStatus: "pending",
+      transactionId,
     });
 
     if (paymentMethod === "COD") {
       return NextResponse.json({ success: true, orderId: order._id, method: "COD" });
+    }
+
+    if (paymentMethod === "bKash") {
+      return NextResponse.json({ success: true, orderId: order._id, method: "bKash" });
     }
 
     // Initialize SSLCommerz for online payments

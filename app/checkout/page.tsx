@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { motion } from "framer-motion";
-import { ShieldCheck, Truck, CreditCard, Wallet, Lock, ArrowLeft } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShieldCheck, Truck, CreditCard, Wallet, Lock, ArrowLeft, Smartphone } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -20,6 +20,8 @@ export default function CheckoutPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [deliveryOption, setDeliveryOption] = useState<"Inside Dhaka" | "Outside Dhaka">("Inside Dhaka");
+  const [showBkashFlow, setShowBkashFlow] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -51,6 +53,13 @@ export default function CheckoutPage() {
       return;
     }
 
+    if (method === "bKash" && !transactionId.trim()) {
+      toast.error("bKash TrxID required", {
+        description: "Please enter your bKash Transaction ID to verify your payment.",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch("/api/orders", {
@@ -63,6 +72,7 @@ export default function CheckoutPage() {
           deliveryFee,
           total,
           paymentMethod: method,
+          transactionId: method === "bKash" ? transactionId : undefined,
         }),
       });
 
@@ -235,6 +245,49 @@ export default function CheckoutPage() {
                    )}
                  </Button>
                  
+                 <Button 
+                   onClick={() => setShowBkashFlow(!showBkashFlow)}
+                   disabled={loading}
+                   variant="outline"
+                   className={`w-full h-20 rounded-full text-xl font-bold border-border transition-all flex items-center justify-center gap-3 ${showBkashFlow ? "bg-pink-600 text-white hover:bg-pink-700" : "hover:bg-secondary/40 text-foreground"}`}
+                 >
+                   <Smartphone className="w-6 h-6" /> Send via bKash
+                 </Button>
+
+                 <AnimatePresence>
+                   {showBkashFlow && (
+                     <motion.div
+                       initial={{ opacity: 0, height: 0 }}
+                       animate={{ opacity: 1, height: "auto" }}
+                       exit={{ opacity: 0, height: 0 }}
+                       className="overflow-hidden"
+                     >
+                       <div className="p-6 rounded-3xl bg-pink-50 border border-pink-100 mt-4 space-y-4">
+                         <div className="text-center">
+                           <p className="text-[11px] font-black uppercase tracking-widest text-pink-600/70 mb-2">Send Money To</p>
+                           <p className="text-3xl font-heading font-black text-pink-700 tracking-wider">018XXXXXXXX</p>
+                           <p className="text-xs text-pink-600/80 font-medium mt-1">Please include your name in the reference</p>
+                         </div>
+                         <div className="space-y-3 pt-4">
+                           <Input 
+                             placeholder="Enter bKash TrxID (e.g. 9F6A2B3C)" 
+                             value={transactionId}
+                             onChange={(e) => setTransactionId(e.target.value)}
+                             className="h-14 rounded-2xl bg-white border-pink-200 text-center uppercase tracking-widest text-pink-900 font-bold focus:ring-2 focus:ring-pink-300"
+                           />
+                           <Button 
+                             onClick={(e) => handleSubmit(e, "bKash")}
+                             disabled={loading || !transactionId}
+                             className="w-full h-14 rounded-2xl bg-pink-600 text-white hover:bg-pink-700 font-bold tracking-widest uppercase text-xs"
+                           >
+                             {loading ? "Verifying..." : "Confirm bKash Payment"}
+                           </Button>
+                         </div>
+                       </div>
+                     </motion.div>
+                   )}
+                 </AnimatePresence>
+
                  <Button 
                    onClick={(e) => handleSubmit(e, "COD")}
                    disabled={loading}
