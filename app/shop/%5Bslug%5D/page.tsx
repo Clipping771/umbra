@@ -82,7 +82,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                 src={product.images[0]} 
                 alt={product.name} 
                 fill 
-                unoptimized={true}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 priority
@@ -100,7 +99,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             <div className="grid grid-cols-3 gap-6">
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="aspect-square rounded-3xl surface border border-border/40 overflow-hidden cursor-pointer hover:border-primary transition-all duration-300 relative group">
-                   <Image src={product.images[0]} alt="" fill unoptimized={true} sizes="100px" className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                   <Image src={product.images[0]} alt="" fill sizes="100px" className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
                 </div>
               ))}
             </div>
