@@ -44,7 +44,7 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent, method: "COD" | "Online") => {
+  const handleSubmit = async (e: React.FormEvent, method: "COD" | "Online" | "bKash") => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.address) {
       toast.error("Required fields missing", {
@@ -236,7 +236,7 @@ export default function CheckoutPage() {
                  <Button 
                    onClick={(e) => handleSubmit(e, "Online")}
                    disabled={loading}
-                   className="w-full h-20 rounded-full text-xl font-bold gradient-primary text-white shadow-2xl hover:shadow-glow transition-all flex items-center justify-center gap-3"
+                   className="w-full h-20 rounded-full text-xl font-bold gradient-primary !text-white shadow-2xl hover:shadow-glow transition-all flex items-center justify-center gap-3"
                  >
                    {loading ? "Processing..." : (
                      <>
@@ -249,7 +249,7 @@ export default function CheckoutPage() {
                    onClick={() => setShowBkashFlow(!showBkashFlow)}
                    disabled={loading}
                    variant="outline"
-                   className={`w-full h-20 rounded-full text-xl font-bold border-border transition-all flex items-center justify-center gap-3 ${showBkashFlow ? "bg-pink-600 text-white hover:bg-pink-700" : "hover:bg-secondary/40 text-foreground"}`}
+                   className={`w-full h-20 rounded-full text-xl font-bold border-border transition-all flex items-center justify-center gap-3 ${showBkashFlow ? "bg-pink-600 !text-white hover:bg-pink-700" : "hover:bg-secondary/40 text-foreground"}`}
                  >
                    <Smartphone className="w-6 h-6" /> Send via bKash
                  </Button>
@@ -278,7 +278,7 @@ export default function CheckoutPage() {
                            <Button 
                              onClick={(e) => handleSubmit(e, "bKash")}
                              disabled={loading || !transactionId}
-                             className="w-full h-14 rounded-2xl bg-pink-600 text-white hover:bg-pink-700 font-bold tracking-widest uppercase text-xs"
+                             className="w-full h-14 rounded-2xl bg-pink-600 !text-white hover:bg-pink-700 font-bold tracking-widest uppercase text-xs"
                            >
                              {loading ? "Verifying..." : "Confirm bKash Payment"}
                            </Button>

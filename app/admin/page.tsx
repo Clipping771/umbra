@@ -501,11 +501,11 @@ export default function AdminDashboard() {
                           </TableCell>
                           <TableCell className="px-10 text-right">
                              <DropdownMenu>
-                               <DropdownMenuTrigger asChild>
-                                 <Button className="h-12 rounded-xl px-8 font-black text-[10px] uppercase tracking-widest bg-foreground text-white hover:bg-foreground/80 transition-all shadow-sm">
+                               <DropdownMenuTrigger render={
+                                 <Button className="h-12 rounded-xl px-8 font-black text-[10px] uppercase tracking-widest bg-foreground !text-white hover:bg-foreground/80 transition-all shadow-sm">
                                    Update Flow
                                  </Button>
-                               </DropdownMenuTrigger>
+                               } />
                                <DropdownMenuContent align="end" className="w-56 rounded-2xl p-2 border-border/40 shadow-xl">
                                  <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-2 pt-2">Payment</DropdownMenuLabel>
                                  <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'paymentStatus', 'paid')} className="text-xs font-bold rounded-xl cursor-pointer">Mark as Paid</DropdownMenuItem>

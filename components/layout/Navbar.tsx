@@ -96,7 +96,7 @@ export default function Navbar() {
             </Link>
 
             <Link href="/shop">
-              <button className="hidden md:flex items-center gap-2 gradient-primary text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:shadow-glow hover:scale-105 transition-all duration-300">
+              <button className="hidden md:flex items-center gap-2 gradient-primary !text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:shadow-glow hover:scale-105 transition-all duration-300">
                 Shop Now
               </button>
             </Link>
@@ -133,7 +133,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <Link href="/shop" onClick={() => setMobileOpen(false)}>
-                <button className="w-full mt-2 gradient-primary text-white px-5 py-3 rounded-xl text-sm font-semibold shadow-md">
+                <button className="w-full mt-2 gradient-primary !text-white px-5 py-3 rounded-xl text-sm font-semibold shadow-md">
                   Shop Now
                 </button>
               </Link>

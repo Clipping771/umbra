@@ -67,7 +67,7 @@ function OrderSuccessContent() {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link href="/shop" className="flex-1 max-w-[240px]">
-              <Button className="w-full rounded-full h-16 text-lg font-bold gradient-primary shadow-2xl hover:shadow-glow transition-all">
+              <Button className="w-full rounded-full h-16 text-lg font-bold gradient-primary !text-white shadow-2xl hover:shadow-glow transition-all">
                 Continue Shop
               </Button>
             </Link>

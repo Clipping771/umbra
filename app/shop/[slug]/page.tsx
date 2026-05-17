@@ -143,7 +143,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                     onClick={() => setSelectedSize(size)}
                     className={`relative py-6 rounded-2xl border-2 transition-all duration-500 group overflow-hidden ${
                       selectedSize === size
-                        ? "border-primary bg-primary text-white shadow-xl shadow-primary/20"
+                        ? "border-primary bg-primary !text-white shadow-xl shadow-primary/20"
                         : "border-border bg-white text-muted-foreground hover:border-primary/30"
                     }`}
                   >
@@ -157,7 +157,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
-              <Button onClick={handleAddToCart} className="flex-[2] h-20 rounded-full text-xl font-bold gradient-primary shadow-2xl hover:shadow-glow transition-all duration-500">
+              <Button onClick={handleAddToCart} className="flex-[2] h-20 rounded-full text-xl font-bold gradient-primary !text-white shadow-2xl hover:shadow-glow transition-all duration-500">
                 <ShoppingBag className="mr-3 h-6 w-6" /> Add to Shopping Bag
               </Button>
               <Link href="/checkout" className="flex-1">

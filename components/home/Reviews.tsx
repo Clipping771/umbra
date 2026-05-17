@@ -97,7 +97,7 @@ export default function Reviews() {
 
               {/* Author */}
               <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-full gradient-primary flex items-center justify-center text-white font-bold text-lg shadow-md flex-shrink-0">
+                <div className="w-11 h-11 rounded-full gradient-primary flex items-center justify-center !text-white font-bold text-lg shadow-md flex-shrink-0">
                   {review.avatar}
                 </div>
                 <div>

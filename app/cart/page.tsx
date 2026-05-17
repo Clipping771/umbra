@@ -139,7 +139,7 @@ export default function CartPage() {
                 </div>
                 
                 <Link href="/checkout" className="block w-full">
-                  <Button className="w-full h-20 rounded-full text-xl font-bold gradient-primary text-white shadow-2xl hover:shadow-glow transition-all group">
+                  <Button className="w-full h-20 rounded-full text-xl font-bold gradient-primary !text-white shadow-2xl hover:shadow-glow transition-all group">
                     Proceed to Secure Checkout
                     <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
                   </Button>
