@@ -14,7 +14,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useCartStore } from "@/store/cartStore";
 import { toast } from "sonner";
 import Link from "next/link";
-import { shimmerBase64 } from "@/lib/utils";
 
 export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -83,8 +82,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                 src={product.images[0]} 
                 alt={product.name} 
                 fill 
-                placeholder="blur"
-                blurDataURL={shimmerBase64}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 priority
@@ -102,7 +99,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             <div className="grid grid-cols-3 gap-4 sm:gap-6">
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="aspect-square rounded-2xl sm:rounded-3xl surface border border-border/40 overflow-hidden cursor-pointer hover:border-primary transition-all duration-300 relative group">
-                   <Image src={product.images[0]} alt="" fill placeholder="blur" blurDataURL={shimmerBase64} sizes="100px" className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                   <Image src={product.images[0]} alt="" fill sizes="100px" className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
                 </div>
               ))}
             </div>
