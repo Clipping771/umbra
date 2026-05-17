@@ -28,6 +28,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 
 export default function AdminDashboard() {
@@ -507,17 +508,21 @@ export default function AdminDashboard() {
                                  </Button>
                                } />
                                <DropdownMenuContent align="end" className="w-56 rounded-2xl p-2 border-border/40 shadow-xl">
-                                 <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-2 pt-2">Payment</DropdownMenuLabel>
-                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'paymentStatus', 'paid')} className="text-xs font-bold rounded-xl cursor-pointer">Mark as Paid</DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'paymentStatus', 'pending')} className="text-xs font-bold rounded-xl cursor-pointer">Mark as Pending</DropdownMenuItem>
+                                 <DropdownMenuGroup>
+                                    <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-2 pt-2">Payment</DropdownMenuLabel>
+                                    <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'paymentStatus', 'paid')} className="text-xs font-bold rounded-xl cursor-pointer">Mark as Paid</DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'paymentStatus', 'pending')} className="text-xs font-bold rounded-xl cursor-pointer">Mark as Pending</DropdownMenuItem>
+                                 </DropdownMenuGroup>
                                  
                                  <DropdownMenuSeparator className="my-2 bg-border/40" />
                                  
-                                 <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-2">Logistics</DropdownMenuLabel>
-                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'pending')} className="text-xs font-bold rounded-xl cursor-pointer">Pending</DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'shipped')} className="text-xs font-bold rounded-xl cursor-pointer text-blue-600">Shipped</DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'delivered')} className="text-xs font-bold rounded-xl cursor-pointer text-emerald-600">Delivered</DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'cancelled')} className="text-xs font-bold rounded-xl cursor-pointer text-red-600">Cancelled</DropdownMenuItem>
+                                 <DropdownMenuGroup>
+                                    <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground px-2">Logistics</DropdownMenuLabel>
+                                    <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'pending')} className="text-xs font-bold rounded-xl cursor-pointer">Pending</DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'shipped')} className="text-xs font-bold rounded-xl cursor-pointer text-blue-600">Shipped</DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'delivered')} className="text-xs font-bold rounded-xl cursor-pointer text-emerald-600">Delivered</DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => handleOrderStatusUpdate(o._id, 'orderStatus', 'cancelled')} className="text-xs font-bold rounded-xl cursor-pointer text-red-600">Cancelled</DropdownMenuItem>
+                                 </DropdownMenuGroup>
                                </DropdownMenuContent>
                              </DropdownMenu>
                           </TableCell>
