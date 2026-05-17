@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import { shimmerBase64 } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types";
 import { ShoppingBag, ArrowRight } from "lucide-react";
@@ -49,6 +50,8 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.images[0]}
             alt={product.name}
             fill
+            placeholder="blur"
+            blurDataURL={shimmerBase64}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-1000 group-hover:scale-110"
           />
