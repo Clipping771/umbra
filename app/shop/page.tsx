@@ -23,9 +23,17 @@ export default function ShopPage() {
       if (searchQuery.trim() !== "") params.append("search", searchQuery);
       
       fetch(`/api/products?${params.toString()}`)
-        .then((res) => res.json())
+        .then(async (res) => {
+          if (!res.ok) throw new Error("API Error");
+          return res.json();
+        })
         .then((data) => {
           setProducts(Array.isArray(data) ? data : []);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch products:", error);
+          setProducts([]);
           setLoading(false);
         });
     }, 300);
