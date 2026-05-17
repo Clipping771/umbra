@@ -49,6 +49,8 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.images[0]}
             alt={product.name}
             fill
+            unoptimized={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-1000 group-hover:scale-110"
           />
           {product.type === "weightless" && (
