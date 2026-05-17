@@ -194,7 +194,7 @@ export default function CheckoutPage() {
 
           {/* Payment Panel */}
           <div className="lg:col-span-5 flex flex-col gap-10">
-            <div className="surface rounded-[3rem] p-12 shadow-2xl border border-border/40 sticky top-40">
+            <div className="surface rounded-[3rem] p-12 shadow-2xl border border-border/40 lg:sticky lg:top-40">
               <h3 className="text-3xl font-heading font-bold text-foreground mb-10 text-center">Bag Summary</h3>
               
               <div className="space-y-5 mb-10 pb-10 border-b border-border/40 max-h-[300px] overflow-y-auto px-2">

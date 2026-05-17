@@ -117,7 +117,7 @@ export default function CartPage() {
 
             {/* Summary Panel */}
             <div className="lg:col-span-4">
-              <div className="surface rounded-[3rem] p-10 shadow-2xl border border-border/40 sticky top-40">
+              <div className="surface rounded-[3rem] p-10 shadow-2xl border border-border/40 lg:sticky lg:top-40">
                 <h3 className="text-3xl font-heading font-bold text-foreground mb-10">Total Summary</h3>
                 
                 <div className="space-y-6 mb-10 pb-10 border-b border-border/40">

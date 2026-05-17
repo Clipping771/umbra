@@ -70,15 +70,15 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
       <Navbar />
       
       <div className="container mx-auto px-6 pt-32 lg:pt-48 pb-40">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32 items-start">
           {/* Visual Showcase */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-10 sticky top-40"
+            className="space-y-10 lg:sticky lg:top-40"
           >
-            <div className="relative aspect-[1/1.1] rounded-[3rem] overflow-hidden surface-floating border border-border/40 group">
+            <div className="relative aspect-[1/1.1] rounded-[2rem] sm:rounded-[3rem] overflow-hidden surface-floating border border-border/40 group">
               <Image 
                 src={product.images[0]} 
                 alt={product.name} 
@@ -99,9 +99,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
               )}
             </div>
             
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="aspect-square rounded-3xl surface border border-border/40 overflow-hidden cursor-pointer hover:border-primary transition-all duration-300 relative group">
+                <div key={i} className="aspect-square rounded-2xl sm:rounded-3xl surface border border-border/40 overflow-hidden cursor-pointer hover:border-primary transition-all duration-300 relative group">
                    <Image src={product.images[0]} alt="" fill placeholder="blur" blurDataURL={shimmerBase64} sizes="100px" className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
                 </div>
               ))}
@@ -122,7 +122,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                   {[1,2,3,4,5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />)}
                 </div>
               </div>
-              <h1 className="text-5xl md:text-7xl font-heading font-bold text-foreground mb-6 leading-[1.1] tracking-tighter">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold text-foreground mb-6 leading-[1.1] tracking-tighter">
                 {product.name.split(' ').slice(0, -1).join(' ')} <br/>
                 <span className="gradient-text italic">{product.name.split(' ').slice(-1)}</span>
               </h1>
@@ -141,7 +141,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`relative py-6 rounded-2xl border-2 transition-all duration-500 group overflow-hidden ${
+                    className={`relative py-4 sm:py-6 rounded-xl sm:rounded-2xl border-2 transition-all duration-500 group overflow-hidden ${
                       selectedSize === size
                         ? "border-primary bg-primary !text-white shadow-xl shadow-primary/20"
                         : "border-border bg-white text-muted-foreground hover:border-primary/30"
@@ -157,11 +157,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
-              <Button onClick={handleAddToCart} className="flex-[2] h-20 rounded-full text-xl font-bold gradient-primary !text-white shadow-2xl hover:shadow-glow transition-all duration-500">
-                <ShoppingBag className="mr-3 h-6 w-6" /> Add to Shopping Bag
+              <Button onClick={handleAddToCart} className="flex-[2] h-16 sm:h-20 rounded-full text-lg sm:text-xl font-bold gradient-primary !text-white shadow-2xl hover:shadow-glow transition-all duration-500">
+                <ShoppingBag className="mr-3 h-5 w-5 sm:h-6 sm:w-6" /> Add to Shopping Bag
               </Button>
               <Link href="/checkout" className="flex-1">
-                 <Button variant="outline" className="w-full h-20 rounded-full text-lg font-bold border-border hover:bg-secondary/40 text-foreground transition-all duration-500">
+                 <Button variant="outline" className="w-full h-16 sm:h-20 rounded-full text-base sm:text-lg font-bold border-border hover:bg-secondary/40 text-foreground transition-all duration-500">
                    Instant Buy
                  </Button>
               </Link>
